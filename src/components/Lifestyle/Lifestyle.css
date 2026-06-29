@@ -1,0 +1,231 @@
+.lifestyle {
+  position: relative;
+  padding: var(--section-pad) 0;
+  background: #0a0a0a;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+/* ── Background ── */
+.lifestyle-bg {
+  position: absolute;
+  inset: -80px;
+  pointer-events: none;
+}
+
+.lifestyle-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.lifestyle-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.orb1 {
+  width: 600px; height: 600px;
+  top: -200px; right: -200px;
+  background: radial-gradient(circle, rgba(57,255,20,0.12) 0%, transparent 70%);
+}
+
+.orb2 {
+  width: 400px; height: 400px;
+  bottom: -100px; left: -100px;
+  background: radial-gradient(circle, rgba(57,255,20,0.08) 0%, transparent 70%);
+}
+
+.orb3 {
+  width: 300px; height: 300px;
+  top: 50%; left: 40%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 70%);
+}
+
+/* Energy lines */
+.lifestyle-energy-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.energy-line {
+  position: absolute;
+  left: calc(var(--i) * 13% + 2%);
+  top: -10%;
+  width: 1px;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(57,255,20,0.4), transparent);
+  animation: energy-fall 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.4s);
+  opacity: 0.6;
+}
+
+@keyframes energy-fall {
+  0% { top: -10%; opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* ── Inner ── */
+.lifestyle-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.lifestyle-badge { color: var(--neon); }
+
+/* ── Header ── */
+.lifestyle-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lifestyle-title {
+  font-size: clamp(4rem, 8vw, 8rem);
+  color: #ffffff;
+  line-height: 0.92;
+  opacity: 0;
+}
+
+/* ── Pillars ── */
+.lifestyle-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.lifestyle-pillar {
+  position: relative;
+  padding: 32px 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0;
+  overflow: hidden;
+}
+
+.lifestyle-pillar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(57,255,20,0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 20px;
+}
+
+.lifestyle-pillar.active,
+.lifestyle-pillar:hover {
+  border-color: rgba(57,255,20,0.3);
+  background: rgba(57,255,20,0.04);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(57,255,20,0.1);
+}
+
+.lifestyle-pillar.active::before,
+.lifestyle-pillar:hover::before { opacity: 1; }
+
+.pillar-icon {
+  font-size: 2.2rem;
+}
+
+.pillar-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.pillar-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+.pillar-arrow {
+  font-size: 1.2rem;
+  color: var(--neon);
+  margin-top: auto;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lifestyle-pillar.active .pillar-arrow,
+.lifestyle-pillar:hover .pillar-arrow { opacity: 1; }
+
+/* Active pillar glow */
+.lifestyle-pillar.active {
+  box-shadow: 0 0 40px rgba(57,255,20,0.15), 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* ── Stats bar ── */
+.lifestyle-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+}
+
+.lifestyle-stat {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  opacity: 0;
+}
+
+.lifestyle-stat:last-child { border-right: none; }
+
+.lifestyle-stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.lifestyle-stat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 1024px) {
+  .lifestyle-pillars { grid-template-columns: repeat(2, 1fr); }
+  .lifestyle-stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .lifestyle-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+}
+
+@media (max-width: 600px) {
+  .lifestyle-inner { padding: 0 24px; gap: 48px; }
+  .lifestyle-pillars { grid-template-columns: 1fr; }
+  .lifestyle-stats-bar { grid-template-columns: repeat(2, 1fr); }
+}
